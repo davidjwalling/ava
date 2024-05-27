@@ -101,7 +101,10 @@ public:
 
 ### The Private Driver Class Implmentation (driver.cpp)
 
-The single instance of the Driver class is instantiated in driver.cpp as theDriver. A reference to this is returned by TheDriver. The address of the instance is returned by TheDriverPtr. Other methods are merely placeholders for now.
+The single instance of the Driver class is instantiated in driver.cpp as theDriver.
+A reference to this is returned by TheDriver.
+The address of the instance is returned by TheDriverPtr.
+Other methods are merely placeholders for now.
 
 ```
 #include "driver.h"
@@ -187,118 +190,56 @@ int __cdecl main(int argc, char* argv[])
 }
 ```
 
-### Helper Function Declarations (api.h)
-
-The tokstrx returns the next token, removing leading characters.
-
-```
-#pragma once
-
-#include "iapi.h"
-
-EXPORT char* tokstrx(char* s, const char* d, const char* x, char** p);
-```
-
-### Helper Function Implementation (api.cpp)
-
-```
-#include "api.h"
-
-char* tokstrx(char* s, const char* d, const char* x, char** p)
-{
-    char* t, * f;
-    const char* e;
-    if (p) {
-        if (!s)
-            s = *p;
-        *p = nullptr;
-    }
-    if (!s || !(*s))
-        return nullptr;
-    t = s;
-    if (d) {
-        for (; *t; t++) {
-            for (e = d; *e && *e != *t; e++);
-            if (!(*e))
-                break;
-        }
-        if (!(*t))
-            return nullptr;
-    }
-    f = t;
-    if (x) {
-        for (; *t; t++) {
-            for (e = x; *e && *t != *e; e++);
-            if (*e) {
-                *t = 0;
-                if (p)
-                    *p = t + 1;
-                break;
-            }
-        }
-    }
-    return f;
-}
-```
 ### The Test Program (testava.cpp)
 
 The test program will test all algorithms implemented in the library.
 
 ```
-#include "api.h"
+#include "iapi.h"
 
-#include <cstdio>
-#include <cstring>
-
-namespace testava {
-    const char* all = "all";
-    const char* dump = "dump";
-    const char* help = "help";
-    const char* test = "test";
-}
+#include <iostream>
 
 bool _dump = false;
 bool _all = false;
 
 void runTests()
 {
-    printf("\n");
-    printf("Tests Completed\n");
+    std::cout << std::endl;
+    std::cout << "Tests Completed" << std::endl;
 }
+
 
 int usage()
 {
-    printf("Usage: testava test [all] [dump]\n");
+    std::cout << "Usage: testava [all] [dump]" << std::endl;
     return 0;
 }
 
 int __cdecl main(int argc, char* argv[])
 {
-    printf("Ava Test Program [0.X]\n");
-    printf("Copyright 2010 David J. Walling. MIT License.\n");
-    if (argc > 4 || (argc == 2 && !strcmp(argv[1], testava::help)))
+    std::cout << "Ava Test Program [0.X]" << std::endl;
+    std::cout << "Copyright 2010 David J. Walling. MIT License." << std::endl;
+
+    if (argc > 3) {
         return usage();
-    char* args[4] = { 0 };
-    for (int n = 0; n < argc; n++)
-        args[n] = argv[n];
-    if (1 == argc) {
-        char cmd[256] = { 0 };
-        fflush(stdin);
-        fgets(cmd, sizeof cmd - 1, stdin);
-        char* nexttok = cmd;
-        for (int n = 1; nexttok && n < 4; n++)
-            args[n] = tokstrx(nexttok, " \t", " \t\n", &nexttok);
     }
-    if (args[1] && !strcmp(args[1], testava::test)) {
-        for (int n = 2; n < 4 && args[n]; n++) {
-            if (!strcmp(args[n], testava::all))
-                _all = true;
-            else if (!strcmp(args[n], testava::dump))
-                _dump = true;
+    if (argc > 2) {
+        if ((std::string(argv[1]) == "all" && std::string(argv[2]) == "dump") || (std::string(argv[1]) == "dump" && std::string(argv[2]) == "all")) {
+            _all = true;
+            _dump = true;
+        } else {
+            return usage();
         }
-        runTests();
-    } else
-        return usage();
+    } else if (argc > 1) {
+        if (std::string(argv[1]) == "all") {
+            _all = true;
+        } else if (std::string(argv[1]) == "dump") {
+            _dump = true;
+        } else {
+            return usage();
+        }
+    }
+    runTests();
     return 0;
 }
 ```
@@ -316,10 +257,10 @@ build/
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "(gdb) Ava",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ava/ava",
+            "program": "${workspaceRoot}/build/ava",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceRoot}",
@@ -328,10 +269,34 @@ build/
             "MIMode": "gdb"
         },
         {
-            "name": "(lldb) Launch",
+            "name": "(gdb) Testava",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ava/ava",
+            "program": "${workspaceRoot}/build/testava",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "(lldb) Ava",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/ava",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) Testava",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/testava",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceRoot}",
@@ -341,4 +306,5 @@ build/
         }
     ]
 }
+
 ```
