@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "(gdb) Ava",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/build/ava",
@@ -14,7 +14,19 @@
             "MIMode": "gdb"
         },
         {
-            "name": "(lldb) Launch",
+            "name": "(gdb) Testava",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/testava",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "(lldb) Ava",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/build/ava",
@@ -24,6 +36,19 @@
             "environment": [],
             "externalConsole": true,
             "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) Testava",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/testava",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb"
         }
     ]
 }
+
