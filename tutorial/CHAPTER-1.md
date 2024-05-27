@@ -22,6 +22,10 @@ user@linux: ~/repos/ava/build$ cd ..
 ```
 user@linux: ~/repos/ava$ code .
 ```
+
+On Linux, choose "(gdb) Ava" or "(gdb) Testava".
+On macOS, choose "(lldb) Ava" or "(lldb) Testava".
+
 ![macos-01.png](/images/macos-01.png)
 
 ## Sources for this Chapter
