@@ -31,7 +31,6 @@ endif()
 #
 
 set (LIB_SRCS
-    api.cpp
     driver.cpp
 )
 
