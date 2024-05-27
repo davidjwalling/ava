@@ -12,7 +12,7 @@ $ git clone https://github.com/davidjwalling/ava.git
 $ cd ava
 ```
 
-### Building Ava using CMake
+### Build Using CMake
 
 ```
 $ cd ~/repos/ava
@@ -22,7 +22,7 @@ $ sudo make install
 $ cd ..
 ```
 
-### Debugging Ava Using Visual Studio Code
+### Debugging Using Visual Studio Code
 
 ```
 $ code .
@@ -35,7 +35,7 @@ On macOS, choose "(lldb) Ava" or "(lldb) Testava".
 
 ## Code Elements
 
-### The General Interface API Header (iapi.h)
+### The General Interface API (iapi.h)
 
 On Windows, EXPORT is dllexport or dllimport as appropriate.
 On Linux and macOS, EXPORT sets default symbol visibility.
@@ -81,7 +81,7 @@ EXPORT IDriver& TheDriver();
 EXPORT IDriver* TheDriverPtr();
 ```
 
-### The Driver Private Implementation (driver.h)
+### The Private Driver Declaration (driver.h)
 
 The Driver class implementation defines public and private methods.
 Private Init and Reset methods allocate and initialize or release and reinitialize, respectively.
@@ -106,7 +106,7 @@ public:
 };
 ```
 
-### The Private Driver Class Implmentation (driver.cpp)
+### The Private Driver Implmentation (driver.cpp)
 
 The single instance of the Driver class is instantiated in driver.cpp as theDriver.
 A reference to this is returned by TheDriver.
