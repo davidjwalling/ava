@@ -15,7 +15,6 @@ namespace ava {
 int __cdecl main(int argc, char* argv[])
 {
     IDriver& driver = TheDriver();
-
     if (driver.Start(argc, argv)) {
         string line;
         while (getline(cin, line) && line != ava::command::exit);
