@@ -184,44 +184,42 @@ The test program will test all algorithms implemented in the library.
 
 #include <iostream>
 
+using namespace std;
+
 bool _dump = false;
 bool _all = false;
 
 void runTests()
 {
-    std::cout << std::endl;
-
-    // invoke algorithm tests here.
-
-    std::cout << "Tests Completed" << std::endl;
+    cout << endl;
+    cout << "Tests Completed" << endl;
 }
 
 
 int usage()
 {
-    std::cout << "Usage: testava [all] [dump]" << std::endl;
+    cout << "Usage: testava [all] [dump]" << endl;
     return 0;
 }
 
 int __cdecl main(int argc, char* argv[])
 {
-    std::cout << "Ava Test Program [0.X]" << std::endl;
-    std::cout << "Copyright 2010 David J. Walling. MIT License." << std::endl;
-
+    cout << "Ava Test Program [0.X]" << endl;
+    cout << "Copyright 2010 David J. Walling. MIT License." << endl;
     if (argc > 3) {
         return usage();
     }
     if (argc > 2) {
-        if ((std::string(argv[1]) == "all" && std::string(argv[2]) == "dump") || (std::string(argv[1]) == "dump" && std::string(argv[2]) == "all")) {
+        if ((string(argv[1]) == "all" && string(argv[2]) == "dump") || (string(argv[1]) == "dump" && string(argv[2]) == "all")) {
             _all = true;
             _dump = true;
         } else {
             return usage();
         }
     } else if (argc > 1) {
-        if (std::string(argv[1]) == "all") {
+        if (string(argv[1]) == "all") {
             _all = true;
-        } else if (std::string(argv[1]) == "dump") {
+        } else if (string(argv[1]) == "dump") {
             _dump = true;
         } else {
             return usage();
