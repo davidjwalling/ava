@@ -23,7 +23,6 @@ int __cdecl main(int argc, char* argv[])
 {
     cout << "Ava Test Program [0.X]" << endl;
     cout << "Copyright 2010 David J. Walling. MIT License." << endl;
-
     if (argc > 3) {
         return usage();
     }
